@@ -20,10 +20,6 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const secretKey = process.env.JWT_SECRET || '77b22a07938ccbb0565abc929d9ee5726affa3c4b197ea58ed28374d8f42161cadf47f74a95a10099d9c9d72541fbea1f579ba123b68cb9021edf8046ce030c6'; // Use environment variable for the secret key
 
-const API_TOKEN_ENERGY = "322f26287a84ed49d269de8d238380f6";
-const todayURL = `https://enever.nl/api/stroomprijs_vandaag.php?token=${API_TOKEN_ENERGY}`;
-const monthURL = `https://enever.nl/api/stroomprijs_laatste30dagen.php?token=${API_TOKEN_ENERGY}`;
-
 // Middleware
 app.use(cors());
 app.use(express.json());
@@ -725,55 +721,6 @@ app.post('/api/contact', (req, res) => {
     });
 });
 
-// Endpoint to add a battery
-app.post('/api/addBattery', verifyToken, (req, res) => {
-    console.log('Request body:', req.body);
-    const { name, capacity, installationDate } = req.body;
-
-    // Validate required fields
-    if (!name || !capacity || !installationDate) {
-        console.error('Missing required fields');
-        return res.status(400).json({ error: 'All fields are required' });
-    }
-
-    const userId = req.userId;  // Now using the userId from the JWT token
-    console.log('User ID:', userId);
-
-    if (!userId) {
-        console.error('Missing user ID');
-        return res.status(401).json({ error: 'Unauthorized' });
-    }
-
-    const sql = 'INSERT INTO Battery (name, capacity, installation_date, user_id) VALUES (?, ?, ?, ?)';
-    db.query(sql, [name, capacity, installationDate, userId], (err, result) => {
-        if (err) {
-            console.error('Database error:', err);
-            return res.status(500).json({ error: 'Database error' });
-        }
-        console.log('Battery added:', result);
-        res.status(201).json({ message: 'Battery added successfully' });
-    });
-});
-app.get('/api/readBatteries',verifyToken, (req, res) => {
-    const userId = req.userId; // Ensure that the userId is available in the session or JWT token
-  
-    if (!userId) {
-      console.error('Missing user ID');
-      return res.status(401).json({ error: 'Unauthorized' });
-    }
-  
-    // Correct SQL query with parameter binding
-    const sql = 'SELECT * FROM battery WHERE user_id = ?';
-    
-    // Assuming you have a MySQL connection `db` to run the query
-    db.query(sql, [userId], (err, results) => {
-      if (err) {
-        console.error('Error fetching batteries:', err);
-        return res.status(500).json({ error: 'Failed to fetch batteries' });
-      }
-      res.json(results); // Send the batteries data as response
-    });
-  });
 // Endpoint to handle user action
 app.post('/api/user-action', authenticateToken, (req, res) => {
     const { userId } = req.body;
@@ -1127,93 +1074,6 @@ app.delete('/api/delete-account', verifyToken, (req, res) => {
 });
 let pendingMfaSecrets = {}; // Temporary storage for pending MFA secrets, ideally use a more persistent storage for production
 
-// --------------------------------------------------------------------SIMULATION SECTION
-
-//Get simulation data from database
-app.post("/api/simulatie", verifyToken, (req, res) => {
-    const { 
-      user_id,
-      energy_usage,
-      house_size,
-      insulation_level,
-      battery_capacity,
-      battery_efficiency,
-      charge_rate,
-      energy_cost,
-      return_rate,
-      use_dynamic_prices,
-    } = req.body;
-  
-    db.query(
-      "INSERT INTO simulatie (user_id, energy_usage, house_size, insulation_level, battery_capacity, battery_efficiency, charge_rate, energy_cost, return_rate, use_dynamic_prices) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-      [user_id, energy_usage, house_size, insulation_level, battery_capacity, battery_efficiency, charge_rate, energy_cost, return_rate, use_dynamic_prices],
-      (err, result) => {
-        if (err) {
-          console.error(err);
-          return res.status(500).send("Error saving simulatie.");
-        }
-        res.status(201).send("Simulatie saved successfully.");
-      }
-    );
-  });
-  
-
-  // Route om de simulaties van een gebruiker op te halen
-  app.get("/api/simulatie/:userId", verifyToken, (req, res) => {
-    const { userId } = req.params;
-  
-    db.query(
-      "SELECT * FROM simulatie WHERE user_id = ?",
-      [userId],
-      (err, results) => {
-        if (err) {
-          console.error(err);
-          return res.status(500).send("Fout bij het ophalen van gegevens.");
-        }
-        res.status(200).json(results);
-      }
-    );
-  });
-
-  //Get simulation data from database
-  app.get("/api/simulatie/:userId", verifyToken, (req, res) => {
-    const { userId } = req.params;
-  
-    db.query(
-      "SELECT * FROM simulatie WHERE user_id = ?",
-      [userId],
-      (err, results) => {
-        if (err) {
-          console.error(err);
-          return res.status(500).send("Fout bij het ophalen van gegevens.");
-        }
-        res.status(200).json(results);
-      }
-    );
-  });
-  
-
-
-// Route to fetch today's prices
-app.get('/api/today-prices', async (req, res) => {
-  try {
-    const response = await axios.get(todayURL);
-    res.json(response.data);
-  } catch (error) {
-    res.status(500).json({ error: 'Error fetching data' });
-  }
-});
-
-
-// Route to fetch monthly prices
-app.get('/api/monthly-prices', async (req, res) => {
-  try {
-    const response = await axios.get(monthURL);
-    res.json(response.data);
-  } catch (error) {
-    res.status(500).json({ error: 'Error fetching data' });
-  }
-});
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);

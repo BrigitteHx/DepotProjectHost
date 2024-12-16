@@ -16,15 +16,10 @@ import PersonalInfoPage from './components/user_account/PersonalInfoPage';
 import DataSharingPage from './components/user_account/DataSharingPage';
 import DashboardPage from './components/user_account/DashboardPage';
 import SettingsPage from './components/user_account/SettingsPage';
-import Sidebar from './components/user_account/Sidebar';
 import UserAccountLayout from './components/user_account/UserAccountLayout';
 import FeedbackForm from './components/feedback/FeedbackForm';
 import BatteryDashboard from './components/battery_dashboard/batteryDashboard';
 import SolarDashboard from './components/solar_dashboard/solarDashboard';
-import SimulatieForm from './components/simulatie_dashboard/SimulatieForm';
-import SimulatieResults from './components/simulatie_dashboard/SimulatieResults'; 
-import EnergyPrices  from './components/simulatie_dashboard/EnergyPrices';
-import SunHours from './components/simulatie_dashboard/SunHours';
 import SimulatieDashboard from './components/simulatie_dashboard/SimulatieDashboard';
 import PrivateRoute from './components/PrivateRoute'; 
 import { AuthProvider } from './components/AuthContext';
@@ -54,10 +49,6 @@ function App() {
             <Route path="/solar_dashboard" element={<SolarDashboard />} />
             <Route path="/about_us" element={<AboutUs />} />
             <Route path="/about_us2" element={<AboutUsPage />} />
-            <Route path="/simulatie" element={<SimulatieForm userId={1} />} />
-            <Route path="/simulatie-results/:userId" element={<SimulatieResults />} />
-            <Route path="/energy-prices" element={<EnergyPrices />} />
-            <Route path="/sun-hours" element={<SunHours />} />
             <Route path="/simulatie_dashboard" element={<SimulatieDashboard />} />
 
             
