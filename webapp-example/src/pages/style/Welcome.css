@@ -1,0 +1,92 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: center; /* Centraal uitlijnen van alle tekst in het body-element */
+}
+
+.main-content {
+    background-color: #fff;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    border-radius: 8px;
+    max-width: 90%;
+    text-align: center; /* Centraal uitlijnen van de inhoud van de main-content */
+}
+
+main h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    color: #003366;
+}
+
+main h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #1D3F75;
+}
+
+main p {
+    font-size: x-large;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+main ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center; /* Centraal uitlijnen van de lijst-items */
+}
+
+main ul li {
+    padding: 5px 0;
+    font-size: x-large;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+button.disabled-button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    cursor: not-allowed;  /* Geeft aan dat de knop niet werkt */
+    background-color: #1D3F75;  /* Grijze kleur om inactiviteit aan te geven */
+    color: #fff;
+    border-radius: 5px;
+    font-size: x-large;
+}
+
+button.disabled-button:hover {
+    background-color: #1a73e8;  /* Verwijdert hover-effect */
+}
+
+@media (max-width: 768px) {
+
+    main h2 {
+        font-size: 1.8rem;
+    }
+
+    main p, main ul li {
+        font-size: large;
+        padding: 0 10%;
+    }
+
+    button.disabled-button {
+        font-size: large;
+    }
+}
+
+.note {
+    font-size: large;
+    color: #ff5733;  /* Een opvallende kleur om de aandacht te trekken */
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+}

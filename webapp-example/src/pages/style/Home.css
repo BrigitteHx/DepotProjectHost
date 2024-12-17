@@ -1,0 +1,70 @@
+/* Styling voor de Home-pagina */
+.home-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Zorg ervoor dat de container de volledige hoogte van het scherm beslaat */
+    background-color: #f4f4f4; /* Achtergrondkleur van de pagina */
+  }
+  
+  .home-content {
+    text-align: center;
+    padding: 30px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    max-width: 800px; /* Vergroot de breedte van de container voor een nettere weergave */
+    width: 100%;
+  }
+  
+  .home-content h1 {
+    font-size: 36px; /* Vergroot de titel voor betere leesbaarheid */
+    margin-bottom: 20px;
+    color: #333; /* Iets donkerdere kleur voor de titel */
+    font-weight: 600; /* Maak de titel vetter */
+  }
+  
+  .home-content p {
+    font-size: 18px;
+    margin-bottom: 30px;
+    color: #555;
+    line-height: 1.6; /* Verhoog de lijnhoogte voor betere leesbaarheid */
+  }
+  
+  /* Knoppen-groep */
+  .button-group {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Twee kolommen voor de knoppen */
+    gap: 20px; /* Ruimte tussen de knoppen */
+    justify-items: center; /* Centraal uitlijnen van de knoppen */
+    align-items: center; /* Zorg ervoor dat de knoppen verticaal gecentreerd zijn */
+  }
+  
+  /* Zorg ervoor dat de knoppen dezelfde grootte hebben */
+  .button {
+    width: 100%; /* Knoppen nemen de volledige breedte van hun grid-cel in */
+    padding: 20px 0; /* Maak de knoppen hoger door padding toe te voegen */
+    background-color: #007bff;
+    color: white;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 8px; /* Ronde hoeken voor een modernere uitstraling */
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    display: inline-block;
+  }
+  
+  /* Hover-effect voor de knoppen */
+  .button:hover {
+    background-color: #0056b3; /* Donkerder blauw bij hover */
+    transform: translateY(-5px); /* Geef een lichte opwaartse beweging */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Voeg een schaduw toe bij hover */
+  }
+  
+  /* Zorg ervoor dat op kleinere schermen de knoppen onder elkaar komen */
+  @media (max-width: 600px) {
+    .button-group {
+      grid-template-columns: 1fr; /* Knoppen nemen 100% van de breedte in op kleinere schermen */
+    }
+  }
+  

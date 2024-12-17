@@ -1,0 +1,129 @@
+/* Zorg ervoor dat de hele body en html de juiste hoogte hebben */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Zorg ervoor dat de body altijd minstens de hoogte van het scherm heeft */
+}
+
+/* Footer styling */
+footer {
+  background-color: #1b3b73;
+  width: 100%;
+  padding-top: 20px;  /* Zorgt voor wat ruimte bovenaan de footer */
+  margin-top: auto;   /* Zorgt ervoor dat de footer altijd aan de onderkant van de pagina komt */
+  text-align: center; /* Centraal uitlijnen van tekst in de footer */
+}
+
+.footerContainer {
+  width: 100%;
+  padding: 30px 0 20px 0; /* Verminder de padding aan de bovenkant voor een strakkere layout */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Zorgt ervoor dat alles in de container gecentreerd wordt */
+  justify-content: center;
+}
+
+.socialIcons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px; /* Zorgt voor ruimte tussen de iconen en de navigatie */
+}
+
+.socialIcons a {
+  text-decoration: none;
+  padding: 12px;  /* Vergroot de padding voor grotere iconen */
+  background-color: white;
+  margin: 10px;
+  border-radius: 50%;
+  width: 50px;  /* Vergroot de breedte en hoogte voor grotere iconen */
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.5s ease, transform 0.5s ease;
+}
+
+.socialIcons a i {
+  font-size: 1.8em;  /* Vergroot de iconen voor een beter uiterlijk */
+  color: #1D3F75;
+  opacity: 0.9;
+  transition: color 0.5s ease;
+}
+
+/* Hover effecten op de social media iconen */
+.socialIcons a:hover {
+  background-color: #1b3b73;
+}
+
+.socialIcons a:hover i {
+  color: white;
+  transform: scale(1.1); /* Maak het icoon iets groter bij hover */
+}
+
+/* Footer Nav styling */
+.footerNav {
+  display: flex;
+  justify-content: center; /* Zorgt ervoor dat de lijst-items horizontaal gecentreerd worden */
+  align-items: center; /* Zorgt ervoor dat de lijst-items verticaal gecentreerd worden */
+  width: 100%;
+  margin-top: 20px; /* Voeg ruimte toe boven de footer-nav */
+}
+
+.footerNav ul {
+  display: flex;  /* Zorgt ervoor dat de lijst-items horizontaal worden weergegeven */
+  padding: 0;
+  margin: 0;
+  justify-content: center; /* Zorgt ervoor dat de lijst zelf in het midden staat */
+}
+
+.footerNav ul li {
+  list-style-type: none;
+  margin: 0 15px; /* Ruimte tussen de lijstitems */
+}
+
+.footerNav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.3em;
+  opacity: .7;
+  transition: .5s;
+}
+
+.footerNav ul li a:hover {
+  opacity: 1;
+}
+
+.footerBottom {
+  background-color: #152d53;
+  padding: 20px;
+  text-align: center; /* Centraal uitlijnen van de tekst in de footerBottom */
+}
+
+.footerBottom p {
+  color: white;
+}
+
+/* Media query voor responsiviteit */
+@media (max-width: 700px) {
+  .footerNav ul {
+    flex-direction: column; /* Zorgt ervoor dat de navigatie verticaal wordt bij kleinere schermen */
+  }
+
+  .footerNav ul li {
+    width: 100%;
+    text-align: center;
+    margin: 10px 0; /* Ruimte tussen de items */
+  }
+
+  .socialIcons a {
+    padding: 10px;
+    margin: 5px;
+    width: 40px;
+    height: 40px;
+  }
+}
